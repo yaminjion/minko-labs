@@ -1,0 +1,37 @@
+body {
+    background-color: rgb(224, 194, 215); 
+    color: rgb(175, 30, 134); 
+    font-family: 'Georgia', serif; 
+    margin: 0;
+}
+
+main {
+    background-color: rgb(240, 220, 230); 
+    color: rgb(150, 40, 110); 
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+header {
+    background-color: rgb(200, 150, 180); 
+    color: rgb(120, 20, 90); 
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Courier New', monospace; 
+
+}
+
+footer {
+    background-color: rgb(200, 150, 180); 
+    color: rgb(120, 20, 90); 
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Courier New', monospace; 
+}
+
+a {
+    color: rgb(150, 40, 110); 
+    text-decoration: none; 
+    font-weight: bold;
+}
