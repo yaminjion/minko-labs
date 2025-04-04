@@ -35,3 +35,21 @@ a {
     text-decoration: none; 
     font-weight: bold;
 }
+a:link {
+    color: rgba(132, 40, 98, 0.685); 
+}
+
+a:visited {
+    color: rgb(220, 150, 193); 
+    text-decoration: underline; 
+}
+
+a:hover {
+    color: rgb(73, 9, 49); 
+    text-decoration: underline; 
+}
+
+a:active {
+    color: black;
+    opacity: 0.3;
+}
