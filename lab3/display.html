@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 3</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            .discount-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                gap: 20px;
+                margin: 20px auto;
+                max-width: 1000px;
+            }
+            
+            .discount {
+                width: 450px;
+                border: 1px solid #dda9c3;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+                overflow: hidden;
+                transition: all 0.3s ease;
+                background: linear-gradient(to bottom, #FFE4E1, #FFF0F5);
+                flex-grow: 1;
+            }
+            
+            .discount:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+            }
+            
+            .discount h1 {
+                background: linear-gradient(to right, #826373, #a08c93);
+                color: white;
+                margin: 0;
+                padding: 15px;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+            }
+            
+            .discount div {
+                padding: 15px;
+                display: none;
+                background-color: #FFF;
+                color: #333;
+                line-height: 1.5;
+                font-size: 16px;
+            }
+            
+            .discount h1:hover + div {
+                display: block;
+            }
+            
+            b {
+                font-weight: bold;
+                color: #5b5057;
+            }
+            
+            i {
+                font-style: italic;
+                color: #986b7a;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 3
+            <hr>
+        </header>
+    
+        <main>
+            <div class="discount-container">
+                <div class="discount">
+                    <h1>Дисконт в теории игр</h1>
+                    <div>
+                        <b>В теории игр</b>, <i>дисконт</i> — текущая стоимость денежной единицы будущего периода, 
+                        умноженная на вероятность повторения игры для игр с неизвестным числом повторений.
+                    </div>
+                </div>
+                <div class="discount">
+                    <h1>Залоговый дисконт</h1>
+                    <div>
+                        <b>Разница</b> между реальной рыночной стоимостью залогового имущества и его залоговой 
+                        стоимостью, используемой для определения суммы выдаваемого банком кредита.
+                    </div>
+                </div>
+                <div class="discount">
+                    <h1>Коммерческий дисконт</h1>
+                    <div>
+                        <b>Скидка</b>, предоставляемая покупателю при оплате товара или услуги до установленного срока.
+                    </div>
+                </div>
+                <div class="discount">
+                    <h1>Банковский дисконт</h1>
+                    <div>
+                        <b>Процентная ставка</b>, по которой банк скупает коммерческие векселя до их срока погашения.
+                    </div>
+                </div>
+                <div class="discount">
+                    <h1>Дисконтная карта</h1>
+                    <div>
+                        <b>Карта</b>, предоставляющая владельцу скидки на товары или услуги в определенных магазинах или сетях.
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
