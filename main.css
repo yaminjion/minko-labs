@@ -34,6 +34,7 @@ a {
     color: rgb(150, 40, 110); 
     text-decoration: none; 
     font-weight: bold;
+    transition: 1s 2s;
 }
 a:link {
     color: rgba(132, 40, 98, 0.685); 
@@ -47,6 +48,7 @@ a:visited {
 a:hover {
     color: rgb(73, 9, 49); 
     text-decoration: underline; 
+    transition: 0.3s;
 }
 
 a:active {
