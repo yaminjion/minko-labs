@@ -11,6 +11,7 @@ main {
     padding: 20px;
     font-size: 18px;
     line-height: 1.6;
+    margin: 10px 20px 56px
 }
 
 header {
@@ -69,4 +70,15 @@ div.menu:hover {
 }
 h1 {
     text-align: center;
+}
+footer {
+    background-color: black;
+    color: lightgreen;
+    padding: 10px;
+    font-size: 16px;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left:0;
 }
