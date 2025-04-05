@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 4 </title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            div {
+                width: 300px;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                background: white;
+                border: 1px dotted darkgreen;
+                margin: 15px;
+            }
+            .position-static {
+                position: relative;
+                z-index: 1;
+            }
+            .position-absolute {
+                position: absolute;
+                left: 300px;
+            }
+            .position-absolute:hover {
+                position: absolute;
+                left: 300px;
+                width: 350px;
+                height: 80px;
+                color: rgb(216, 56, 83);
+                box-shadow: 0 0 15px rgb(77, 69, 69);
+            }
+            .position-relative {
+                position: relative;
+                left: 150px;
+                top: -130px;
+                z-index: 0;
+            }
+            .position-relative:hover {
+                position: relative;
+                z-index: 2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 4
+            <hr>
+        </header>
+
+        <main>
+            <div class="position-static">static</div>
+            <div class="position-static">static</div>
+            <div class="position-relative">relative</div>
+            <div>static</div>
+            <div>static</div>
+            <div class="position-absolute">absolute</div>
+            <div>static</div>
+            <div>static</div>
+            <div>static</div>
+            <div>static</div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+    </body>
+</html>

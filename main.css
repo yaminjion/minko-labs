@@ -6,7 +6,7 @@ body {
 }
 
 main {
-    background-color: rgb(240, 220, 230); 
+
     color: rgb(150, 40, 110); 
     padding: 20px;
     font-size: 18px;
@@ -81,4 +81,5 @@ footer {
     bottom: 0;
     right: 0;
     left:0;
+    z-index: 1000;
 }
