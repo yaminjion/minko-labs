@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Минько Елена Михайловна. Лабораторная 4</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16.png">
+    <link rel="icon" href="../favicon-32x32.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tag-cloud {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .tag {
+            position: absolute;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        .tag:hover {
+            transform: scale(2.5) !important;
+            text-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        .tag1 { color: #FF5733; font-size: 24px; top: 10%; left: 5%; transform: rotate(-5deg); }
+        .tag2 { color: #33FF57; font-size: 36px; top: 15%; left: 25%; transform: rotate(3deg); }
+        .tag3 { color: #3357FF; font-size: 30px; top: 8%; left: 45%; transform: rotate(-8deg); }
+        .tag4 { color: #F033FF; font-size: 28px; top: 20%; left: 65%; transform: rotate(10deg); }
+        .tag5 { color: #33FFF5; font-size: 34px; top: 25%; left: 15%; transform: rotate(-12deg); }
+        .tag6 { color: #FF33F5; font-size: 32px; top: 12%; left: 75%; transform: rotate(5deg); }
+        .tag7 { color: #8A2BE2; font-size: 38px; top: 35%; left: 30%; transform: rotate(-15deg); }
+        .tag8 { color: #FF6347; font-size: 36px; top: 50%; left: 10%; transform: rotate(8deg); }
+        .tag9 { color: #4682B4; font-size: 40px; top: 30%; left: 55%; transform: rotate(-3deg); }
+        .tag10 { color: #9ACD32; font-size: 38px; top: 60%; left: 25%; transform: rotate(12deg); }
+        .tag11 { color: #FF4500; font-size: 42px; top: 70%; left: 40%; transform: rotate(-7deg); }
+        .tag12 { color: #DA70D6; font-size: 40px; top: 45%; left: 70%; transform: rotate(15deg); }
+        .tag13 { color: #6495ED; font-size: 44px; top: 15%; left: 85%; transform: rotate(-10deg); }
+        .tag14 { color: #DC143C; font-size: 46px; top: 65%; left: 60%; transform: rotate(5deg); }
+        .tag15 { color: #20B2AA; font-size: 48px; top: 75%; left: 80%; transform: rotate(-18deg); }
+        .tag16 { color: #FFD700; font-size: 32px; top: 5%; left: 85%; transform: rotate(7deg); }
+        .tag17 { color: #ADFF2F; font-size: 34px; top: 40%; left: 5%; transform: rotate(-14deg); }
+        .tag18 { color: #FF69B4; font-size: 36px; top: 55%; left: 90%; transform: rotate(11deg); }
+        .tag19 { color: #CD5C5C; font-size: 38px; top: 80%; left: 15%; transform: rotate(-6deg); }
+        .tag20 { color: #8B4513; font-size: 40px; top: 85%; left: 75%; transform: rotate(4deg); }
+        .tag21 { color: #1E90FF; font-size: 42px; top: 90%; left: 35%; transform: rotate(-13deg); }
+        .tag22 { color: #D2691E; font-size: 44px; top: 95%; left: 60%; transform: rotate(9deg); }
+        .tag23 { color: #FF1493; font-size: 46px; top: 2%; left: 20%; transform: rotate(-16deg); }
+        .tag24 { color: #00BFFF; font-size: 48px; top: 5%; left: 50%; transform: rotate(10deg); }
+        .tag25 { color: #6A5ACD; font-size: 50px; top: 10%; left: 70%; transform: rotate(-11deg); }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+        <hr>
+    </header>
+    <div class="tag-cloud">
+        <span class="tag tag1">JavaScript</span>
+        <span class="tag tag2">Python</span>
+        <span class="tag tag3">HTML</span>
+        <span class="tag tag4">CSS</span>
+        <span class="tag tag5">Java</span>
+        <span class="tag tag6">C++</span>
+        <span class="tag tag7">PHP</span>
+        <span class="tag tag8">SQL</span>
+        <span class="tag tag9">React</span>
+        <span class="tag tag10">Vue.js</span>
+        <span class="tag tag11">Node.js</span>
+        <span class="tag tag12">Django</span>
+        <span class="tag tag13">Git</span>
+        <span class="tag tag14">Docker</span>
+        <span class="tag tag15">Machine Learning</span>
+        <span class="tag tag16">Angular</span>
+        <span class="tag tag17">Ruby</span>
+        <span class="tag tag18">TypeScript</span>
+        <span class="tag tag19">Kubernetes</span>
+        <span class="tag tag20">MongoDB</span>
+        <span class="tag tag21">Flask</span>
+        <span class="tag tag22">Swift</span>
+        <span class="tag tag23">Kotlin</span>
+        <span class="tag tag24">Go</span>
+        <span class="tag tag25">Rust</span>
+    </div>
+
+    <footer>
+        <hr>
+        &copy; Минько Елена Михайловна, ФБИ-34, 2 курс, 2024
+    </footer>
+</body>
+</html>
