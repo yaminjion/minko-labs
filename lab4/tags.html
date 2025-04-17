@@ -31,38 +31,49 @@
             cursor: pointer;
             white-space: nowrap;
             font-weight: bold;
+            animation: float 10s infinite;
         }
 
         .tag:hover {
+            animation-play-state: paused;
             transform: scale(2.5) !important;
             text-shadow: 0 0 10px rgba(0,0,0,0.3);
             z-index: 100;
         }
-        .tag1 { color: #FF5733; font-size: 24px; top: 10%; left: 5%; transform: rotate(-5deg); }
-        .tag2 { color: #33FF57; font-size: 36px; top: 15%; left: 25%; transform: rotate(3deg); }
-        .tag3 { color: #3357FF; font-size: 30px; top: 8%; left: 45%; transform: rotate(-8deg); }
-        .tag4 { color: #F033FF; font-size: 28px; top: 20%; left: 65%; transform: rotate(10deg); }
-        .tag5 { color: #33FFF5; font-size: 34px; top: 25%; left: 15%; transform: rotate(-12deg); }
-        .tag6 { color: #FF33F5; font-size: 32px; top: 12%; left: 75%; transform: rotate(5deg); }
-        .tag7 { color: #8A2BE2; font-size: 38px; top: 35%; left: 30%; transform: rotate(-15deg); }
-        .tag8 { color: #FF6347; font-size: 36px; top: 50%; left: 10%; transform: rotate(8deg); }
-        .tag9 { color: #4682B4; font-size: 40px; top: 30%; left: 55%; transform: rotate(-3deg); }
-        .tag10 { color: #9ACD32; font-size: 38px; top: 60%; left: 25%; transform: rotate(12deg); }
-        .tag11 { color: #FF4500; font-size: 42px; top: 70%; left: 40%; transform: rotate(-7deg); }
-        .tag12 { color: #DA70D6; font-size: 40px; top: 45%; left: 70%; transform: rotate(15deg); }
-        .tag13 { color: #6495ED; font-size: 44px; top: 15%; left: 85%; transform: rotate(-10deg); }
-        .tag14 { color: #DC143C; font-size: 46px; top: 65%; left: 60%; transform: rotate(5deg); }
-        .tag15 { color: #20B2AA; font-size: 48px; top: 75%; left: 80%; transform: rotate(-18deg); }
-        .tag16 { color: #FFD700; font-size: 32px; top: 5%; left: 85%; transform: rotate(7deg); }
-        .tag17 { color: #ADFF2F; font-size: 34px; top: 40%; left: 5%; transform: rotate(-14deg); }
-        .tag18 { color: #FF69B4; font-size: 36px; top: 55%; left: 90%; transform: rotate(11deg); }
-        .tag19 { color: #CD5C5C; font-size: 38px; top: 80%; left: 15%; transform: rotate(-6deg); }
-        .tag20 { color: #8B4513; font-size: 40px; top: 85%; left: 75%; transform: rotate(4deg); }
-        .tag21 { color: #1E90FF; font-size: 42px; top: 90%; left: 35%; transform: rotate(-13deg); }
-        .tag22 { color: #D2691E; font-size: 44px; top: 95%; left: 60%; transform: rotate(9deg); }
-        .tag23 { color: #FF1493; font-size: 46px; top: 2%; left: 20%; transform: rotate(-16deg); }
-        .tag24 { color: #00BFFF; font-size: 48px; top: 5%; left: 50%; transform: rotate(10deg); }
-        .tag25 { color: #6A5ACD; font-size: 50px; top: 10%; left: 70%; transform: rotate(-11deg); }
+
+        /* Индивидуальные стили для каждого тега */
+        .tag1 { color: #FF5733; font-size: 24px; }
+        .tag2 { color: #33FF57; font-size: 36px; }
+        .tag3 { color: #3357FF; font-size: 30px; }
+        .tag4 { color: #F033FF; font-size: 28px; }
+        .tag5 { color: #33FFF5; font-size: 34px; }
+        .tag6 { color: #FF33F5; font-size: 32px; }
+        .tag7 { color: #8A2BE2; font-size: 38px; }
+        .tag8 { color: #FF6347; font-size: 36px; }
+        .tag9 { color: #4682B4; font-size: 40px; }
+        .tag10 { color: #9ACD32; font-size: 38px; }
+        .tag11 { color: #FF4500; font-size: 42px; }
+        .tag12 { color: #DA70D6; font-size: 40px; }
+        .tag13 { color: #6495ED; font-size: 44px; }
+        .tag14 { color: #DC143C; font-size: 46px; }
+        .tag15 { color: #20B2AA; font-size: 48px; }
+        .tag16 { color: #FFD700; font-size: 32px; }
+        .tag17 { color: #ADFF2F; font-size: 34px; }
+        .tag18 { color: #FF69B4; font-size: 36px; }
+        .tag19 { color: #CD5C5C; font-size: 38px; }
+        .tag20 { color: #8B4513; font-size: 40px; }
+        .tag21 { color: #1E90FF; font-size: 42px; }
+        .tag22 { color: #D2691E; font-size: 44px; }
+        .tag23 { color: #FF1493; font-size: 46px; }
+        .tag24 { color: #00BFFF; font-size: 48px; }
+        .tag25 { color: #6A5ACD; font-size: 50px; }
+
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+            100% { transform: translate(0, 0); }
+        }
     </style>
 </head>
 <body>
@@ -102,5 +113,22 @@
         <hr>
         &copy; Минько Елена Михайловна, ФБИ-34, 2 курс, 2024
     </footer>
+
+    <script>
+        document.querySelectorAll('.tag').forEach(tag => {
+            const initialTop = Math.random() * 90 + 5;
+            const initialLeft = Math.random() * 90 + 5;
+            tag.style.top = initialTop + '%';
+            tag.style.left = initialLeft + '%';
+
+            tag.addEventListener('mouseenter', () => {
+                tag.style.animationPlayState = 'paused';
+            });
+
+            tag.addEventListener('mouseleave', () => {
+                tag.style.animationPlayState = 'running';
+            });
+        });
+    </script>
 </body>
 </html>
