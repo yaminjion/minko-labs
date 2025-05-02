@@ -78,6 +78,15 @@
                 </div>
                 <div><img src="mew5.jpg" id="invertImage"></div>
             </div>
+
+            <div class="control-group">
+                <div>
+                    Фильтр saturate:
+                    <input type="range" min="0" max="500" value="100" onchange="filterChange()" id="saturateValue">
+                    <span id="saturateOutput">100%</span>
+                </div>
+                <div><img src="mew6.jpg" id="saturateImage"></div>
+            </div>
         </main>
 
         <script>
@@ -111,6 +120,11 @@
                 let invertValue = document.getElementById('invertValue').value + '%';
                 document.getElementById('invertOutput').innerText = invertValue;
                 document.getElementById('invertImage').style.filter = 'invert(' + invertValue + ')';
+                
+                // Обработка saturate
+                let saturateValue = document.getElementById('saturateValue').value + '%';
+                document.getElementById('saturateOutput').innerText = saturateValue;
+                document.getElementById('saturateImage').style.filter = 'saturate(' + saturateValue + ')';
             }
         </script>
 
