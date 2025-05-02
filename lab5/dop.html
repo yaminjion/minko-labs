@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 5</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            .image-container {
+                position: relative;
+                display: inline-block;
+                margin: 20px 0;
+            }
+            #filtered-image {
+                max-width: 100%;
+                transition: filter 0.1s;
+            }
+            .info-panel {
+                margin: 10px 0;
+                padding: 10px;
+                background-color: #e8f4f8;
+                border-radius: 5px;
+            }
+            .help-box {
+                margin-top: 30px;
+                padding: 15px;
+                background-color: #e8f4f8;
+                border: 1px solid #b3d9e8;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+            <hr>
+        </header>
+
+        <main>
+            
+            <div class="image-container">
+                <img id="filtered-image" src="dop.jpg" alt="Пример изображения">
+            </div>
+            
+            <div class="info-panel">
+                Текущий фильтр: <span id="filter-name">none</span><br>
+                Интенсивность: <span id="filter-intensity">0%</span>
+            </div>
+            
+            <div class="help-box">
+                <h3>Как использовать:</h3>
+                <p>1. Наведите курсор на изображение - будет применён фильтр "sepia"</p>
+                <p>2. Перемещайте курсор слева направо для изменения интенсивности эффекта</p>
+                <p>3. Удерживайте клавиши для других фильтров:</p>
+                <ul>
+                    <li><strong>Ctrl</strong> - размытие (blur)</li>
+                    <li><strong>Alt</strong> - оттенки серого (grayscale)</li>
+                    <li><strong>Shift</strong> - поворот оттенка (hue-rotate)</li>
+                </ul>
+            </div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+        <script>
+            const image = document.getElementById('filtered-image');
+            const filterName = document.getElementById('filter-name');
+            const filterIntensity = document.getElementById('filter-intensity');
+            
+            let currentFilter = 'sepia';
+            let maxValues = {
+                'sepia': 1,
+                'blur': 5,
+                'grayscale': 1,
+                'hue-rotate': 360
+            };
+            
+            image.addEventListener('mousemove', function(e) {
+                const rect = image.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = x / rect.width;
+                
+                if (e.ctrlKey) {
+                    currentFilter = 'blur';
+                } else if (e.altKey) {
+                    currentFilter = 'grayscale';
+                } else if (e.shiftKey) {
+                    currentFilter = 'hue-rotate';
+                } else {
+                    currentFilter = 'sepia';
+                }
+                
+                const maxValue = maxValues[currentFilter];
+                const currentValue = percentage * maxValue;
+
+                let filterValue;
+                switch(currentFilter) {
+                    case 'blur':
+                        filterValue = `blur(${currentValue}px)`;
+                        break;
+                    case 'grayscale':
+                        filterValue = `grayscale(${currentValue})`;
+                        break;
+                    case 'hue-rotate':
+                        filterValue = `hue-rotate(${currentValue}deg)`;
+                        break;
+                    case 'sepia':
+                    default:
+                        filterValue = `sepia(${currentValue})`;
+                }
+                
+                image.style.filter = filterValue;
+                
+                filterName.textContent = currentFilter;
+                filterIntensity.textContent = `${Math.round(percentage * 100)}%`;
+            });
+            
+            image.addEventListener('mouseleave', function() {
+                image.style.filter = 'none';
+                filterName.textContent = 'none';
+                filterIntensity.textContent = '0%';
+            });
+        </script>
+    </body>
+</html>
