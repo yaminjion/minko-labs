@@ -60,6 +60,15 @@
                 </div>
                 <div><img src="mew3.jpg" id="grayscaleImage"></div>
             </div>
+
+            <div class="control-group">
+                <div>
+                    Фильтр hue-rotate:
+                    <input type="range" min="0" max="360" value="0" onchange="filterChange()" id="hueRotateValue">
+                    <span id="hueRotateOutput">0deg</span>
+                </div>
+                <div><img src="mew4.jpg" id="hueRotateImage"></div>
+            </div>
         </main>
 
         <script>
@@ -83,6 +92,11 @@
                 let grayscaleValue = document.getElementById('grayscaleValue').value + '%';
                 document.getElementById('grayscaleOutput').innerText = grayscaleValue;
                 document.getElementById('grayscaleImage').style.filter = 'grayscale(' + grayscaleValue + ')';
+                
+                // Обработка hue-rotate
+                let hueRotateValue = document.getElementById('hueRotateValue').value + 'deg';
+                document.getElementById('hueRotateOutput').innerText = hueRotateValue;
+                document.getElementById('hueRotateImage').style.filter = 'hue-rotate(' + hueRotateValue + ')';
             }
         </script>
 
