@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 5</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            body {
+                position: relative;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .circle {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                font-size: 24px;
+                position: absolute;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+            
+            #reset-button {
+                padding: 12px 24px;
+                font-size: 16px;
+                margin: 20px;
+                cursor: pointer;
+                background-color: #392c31;
+                color: rgb(215, 171, 198);
+                border: none;
+                border-radius: 25px;
+                font-weight: bold;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+            }
+            
+            #reset-button:hover {
+                background-color: #544e56;
+                transform: translateY(-2px);
+            }
+            
+            main {
+                padding-bottom: 60px;
+            }
+            
+            .controls {
+                text-align: center;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const colors = [
+                '#e8417e', '#e1408e', '#db7093', '#ed6f9e', 
+                '#fcb8cd', '#f78fa8', '#d9596e', '#b32851',
+                '#913644', '#c76776'
+            ];
+            
+            const container = document.getElementById('circles-container');
+            
+            for (let i = 1; i <= 10; i++) {
+                const circle = document.createElement('div');
+                circle.className = 'circle';
+                circle.textContent = i;
+                circle.style.backgroundColor = colors[i-1];
+                
+                const maxX = window.innerWidth - 100;
+                const maxY = window.innerHeight - 250;
+                circle.style.left = Math.floor(Math.random() * maxX) + 'px';
+                circle.style.top = (Math.floor(Math.random() * maxY) + 150) + 'px';
+
+                circle.addEventListener('click', function() {
+                    this.style.width = '0';
+                    this.style.height = '0';
+                    this.style.opacity = '0';
+                });
+                
+                container.appendChild(circle);
+            }
+
+            document.getElementById('reset-button').addEventListener('click', function() {
+                const circles = document.querySelectorAll('.circle');
+                circles.forEach(circle => {
+                    circle.style.width = '80px';
+                    circle.style.height = '80px';
+                    circle.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+            <hr>
+        </header>
+
+        <main>
+            <div class="controls">
+                <button id="reset-button">Восстановить круги</button>
+            </div>
+            <div id="circles-container"></div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+    </body>
+</html>
