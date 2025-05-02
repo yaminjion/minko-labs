@@ -32,6 +32,41 @@
             let result = a * b;
             alert("Произведение " + a + " и " + b + " равно " + result);    
         }
+        function showDiv() {
+            let inputA=document.getElementById('numberA')
+            let inputB=document.getElementById('numberB')
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            if(b==0) {
+                alert('На ноль делить нельзя!')
+                inputB.focus();
+                inputB.select();
+                inputB.style.color = "red";
+                inputB.style.borderColor = "red";
+                return;
+            }
+            
+            if (isNaN(a)) {
+                alert('Введите числовое значение в первое поле');
+                inputA.style.color = "red";
+                inputA.style.borderColor = "red";
+                return;
+            }
+            if (isNaN(b)) {
+                alert('Введите числовое значение во второе поле');
+                inputB.style.color = "red";
+                inputB.style.borderColor = "red";
+                return;
+            }
+
+            inputB.style.color="";
+            inputB.style.borderColor = "";
+            let result = a/b;
+                alert(a + "/" + b + "=" + result);    
+        }
+
+        
+
         function showAuthor() {
             let author = "Автор страницы: \nМинько Елена Михайловна"
             alert(author);
@@ -78,6 +113,7 @@
         <div class="message" onclick="showDifference()">Найти разность чисел</div>
         <div class="message" onclick="showProduct()">Найти произведение</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
+        <div class="message" onclick="showDiv()">Найти отношение чисел</div>
     </main>
 
     <footer ondblclick="showHI()">
