@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 5 </title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            #block {
+                width: 300px;
+                height: 200px;
+                border: 2px solid rgb(222, 177, 204);
+                background-color: #beb5b7;
+                cursor: crosshair;
+                transition: all 0.3s ease;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+        </style>
+        <script>
+            function showCoords() {
+                let x = this.event.x;
+                let y = this.event.y;
+                let div = document.getElementById('block');
+                
+                div.style.color = 'black';
+                div.style.backgroundColor = '#beb5b7';
+                div.style.border = '2px solid rgb(222, 177, 204)'; 
+                let message = 'x = ' + x + ' px<br><b>y</b> = ' + y + ' px';
+                let keyMessages = [];
+                
+              
+                if(this.event.ctrlKey) {
+                    div.style.color = 'red';
+                    keyMessages.push('Нажата клавиша Ctrl');
+                }
+                
+                if(this.event.altKey) {
+                    div.style.backgroundColor = '#b53a67'; 
+                    keyMessages.push('Нажата клавиша Alt');
+                }
+                
+                if(this.event.shiftKey) {
+                    div.style.border = '3px dashed #1c0910'; 
+                    keyMessages.push('Нажата клавиша Shift');
+                }
+                
+                if(keyMessages.length > 0) {
+                    message += '<br><br>' + keyMessages.join('<br>');
+                }
+                
+                div.innerHTML = message;
+            }
+        </script>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+            <hr>
+        </header>
+
+        <main>
+            <div id="block" onmousemove="showCoords()"></div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
