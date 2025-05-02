@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 5 </title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            .cart-box {
+                border: 2px solid #ab9c9c;
+                border-radius: 10px;
+                padding: 15px;
+                max-width: 350px;
+                margin: 0 auto;
+                background-color: #2a2a2a;
+            }
+            .product {
+                margin-bottom: 12px;
+                color: rgb(218, 189, 198);
+            }
+            .product h3 {
+                margin: 5px 0;
+                font-size: 16px;
+            }
+            .product p {
+                margin: 5px 0;
+                font-size: 14px;
+            }
+            .product input {
+                width: 100%;
+                padding: 6px;
+                box-sizing: border-box;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 15px;
+            }
+            button {
+                padding: 6px 12px;
+                background-color: #6a5260;
+                color: rgb(244, 240, 243);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            #total {
+                margin-top: 15px;
+                padding: 8px;
+                background-color: #f3e5f0;
+                border-radius: 4px;
+                text-align: center;
+                display: none;
+            }
+        </style>
+    </head>  
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+            <hr>
+        </header>
+        <script>
+            function calculateTotal() {
+                const quantities = document.querySelectorAll('.quantity');
+                let total = 0;
+                let hasItems = false;
+                
+                quantities.forEach(input => {
+                    const quantity = parseInt(input.value) || 0;
+                    const price = parseInt(input.dataset.price);
+                    total += quantity * price;
+                    if (quantity > 0) hasItems = true;
+                });
+                
+                const totalElement = document.getElementById('total');
+                if (hasItems) {
+                    totalElement.textContent = `Общая сумма: ${total.toLocaleString('ru-RU')} ₽`;
+                    totalElement.style.display = 'block';
+                } else {
+                    totalElement.textContent = 'Добавьте товары в корзину';
+                    totalElement.style.display = 'block';
+                }
+            }
+
+            function clearCart() {
+                const quantities = document.querySelectorAll('.quantity');
+                quantities.forEach(input => {
+                    input.value = '';
+                });
+                
+                const totalElement = document.getElementById('total');
+                totalElement.style.display = 'none';
+            }
+        </script>
+        <main>
+            <div class="cart-box">
+                <h2 style="text-align: center; color: rgb(214, 184, 194)">Корзина товаров</h2>
+                
+                <div class="product">
+                    <h3>Ананасы</h3>
+                    <p>Цена: 250 ₽ за штуку</p>
+                    <input type="number" min="0" placeholder="Сколько ананасов нужно?" class="quantity" data-price="250">
+                </div>
+                
+                <div class="product">
+                    <h3>Бананы</h3>
+                    <p>Цена: 120 ₽ за кг</p>
+                    <input type="number" min="0" placeholder="Введите сколько кг бананов" class="quantity" data-price="120">
+                </div>
+                
+                <div class="product">
+                    <h3>Клубника</h3>
+                    <p>Цена: 350 ₽ за контейнер</p>
+                    <input type="number" min="0" placeholder="Сколько контейнеров клубники?" class="quantity" data-price="350">
+                </div>
+                
+                <div class="product">
+                    <h3>Яблоки</h3>
+                    <p>Цена: 90 ₽ за кг</p>
+                    <input type="number" min="0" placeholder="Введите сколько кг яблок" class="quantity" data-price="90">
+                </div>
+                
+                <div class="product">
+                    <h3>Манго</h3>
+                    <p>Цена: 300 ₽ за штуку</p>
+                    <input type="number" min="0" placeholder="Сколько манго нужно?" class="quantity" data-price="300">
+                </div>
+                
+                <div class="buttons">
+                    <button onclick="calculateTotal()">Рассчитать</button>
+                    <button onclick="clearCart()">Очистить</button>
+                </div>
+                
+                <div id="total"></div>
+            </div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+    </body>
+</html>
