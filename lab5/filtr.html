@@ -31,7 +31,7 @@
                     <input type="range" min="0" max="20" value="0" onchange="filterChange()" id="blurValue">
                     <span id="blurOutput">0px</span>
                 </div>
-                <div><img src="mew.jpg" id="blurImage"></div>
+                <div><img src="mew.png" id="blurImage"></div>
             </div>
 
             <div class="control-group">
@@ -69,6 +69,15 @@
                 </div>
                 <div><img src="mew4.jpg" id="hueRotateImage"></div>
             </div>
+
+            <div class="control-group">
+                <div>
+                    Фильтр invert:
+                    <input type="range" min="0" max="100" value="0" onchange="filterChange()" id="invertValue">
+                    <span id="invertOutput">0%</span>
+                </div>
+                <div><img src="mew5.jpg" id="invertImage"></div>
+            </div>
         </main>
 
         <script>
@@ -97,6 +106,11 @@
                 let hueRotateValue = document.getElementById('hueRotateValue').value + 'deg';
                 document.getElementById('hueRotateOutput').innerText = hueRotateValue;
                 document.getElementById('hueRotateImage').style.filter = 'hue-rotate(' + hueRotateValue + ')';
+                
+                // Обработка invert
+                let invertValue = document.getElementById('invertValue').value + '%';
+                document.getElementById('invertOutput').innerText = invertValue;
+                document.getElementById('invertImage').style.filter = 'invert(' + invertValue + ')';
             }
         </script>
 
