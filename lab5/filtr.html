@@ -8,30 +8,27 @@
         <link rel="icon" href="../favicon-16x16.png">
         <link rel="icon" href="../favicon-32x32.png">
     </head>
-
     <body>
         <header>
             НГТУ, ФБ, Лабораторная работа 5
             <hr>
         </header>
-
+        
         <main>
-            <ol>
-                <li>
-                    <a href="arithmetic.html">Арифметика</a>
-                </li>
-                <li>
-                    <a href="cart.html">Корзина</a>
-                </li>
-                <li>
-                    <a href="circles.html">Круги</a>
-                </li>
-                <li>
-                    <a href="filtr.html">Фильтры</a>
-                </li>
-            </ol>
+            <div>
+                Фильтр blur:
+                <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+                <span id = "blurOutput"></span>
+            </div>
+            <div><img src="mew.png" id="blurImage" ></div>
         </main>
-    
+        <script>
+            function blurChange() {
+                let value = document.getElementById('blurValue').value + 'px';
+                document.getElementById('blurOutput').innerText=value;
+                document.getElementById('blurImage').style.filter='blur('+ value +')';
+            }   
+        </script>
         <footer>
             <hr>
             &copy; Елена Минько, ФБИ-34, 2 курс, 2025
