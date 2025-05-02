@@ -42,17 +42,31 @@
                 </div>
                 <div><img src="mew1.jpg" id="brightnessImage"></div>
             </div>
+
+            <div class="control-group">
+                <div>
+                    Фильтр contrast:
+                    <input type="range" min="0" max="500" value="100" onchange="filterChange()" id="contrastValue">
+                    <span id="contrastOutput">100%</span>
+                </div>
+                <div><img src="mew2.jpg" id="contrastImage"></div>
+            </div>
         </main>
 
         <script>
             function filterChange() {
-                let blurValue = document.getElementById('blurValue').value + ' px';
+
+                let blurValue = document.getElementById('blurValue').value + 'px';
                 document.getElementById('blurOutput').innerText = blurValue;
                 document.getElementById('blurImage').style.filter = 'blur(' + blurValue + ')';
-                
+
                 let brightnessValue = document.getElementById('brightnessValue').value + '%';
                 document.getElementById('brightnessOutput').innerText = brightnessValue;
                 document.getElementById('brightnessImage').style.filter = 'brightness(' + brightnessValue + ')';
+
+                let contrastValue = document.getElementById('contrastValue').value + '%';
+                document.getElementById('contrastOutput').innerText = contrastValue;
+                document.getElementById('contrastImage').style.filter = 'contrast(' + contrastValue + ')';
             }
         </script>
 
