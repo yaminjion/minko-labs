@@ -87,6 +87,15 @@
                 </div>
                 <div><img src="mew6.jpg" id="saturateImage"></div>
             </div>
+
+            <div class="control-group">
+                <div>
+                    Фильтр sepia:
+                    <input type="range" min="0" max="100" value="0" onchange="filterChange()" id="sepiaValue">
+                    <span id="sepiaOutput">0%</span>
+                </div>
+                <div><img src="mew7.jpg" id="sepiaImage"></div>
+            </div>
         </main>
 
         <script>
@@ -125,6 +134,11 @@
                 let saturateValue = document.getElementById('saturateValue').value + '%';
                 document.getElementById('saturateOutput').innerText = saturateValue;
                 document.getElementById('saturateImage').style.filter = 'saturate(' + saturateValue + ')';
+                
+                // Обработка sepia
+                let sepiaValue = document.getElementById('sepiaValue').value + '%';
+                document.getElementById('sepiaOutput').innerText = sepiaValue;
+                document.getElementById('sepiaImage').style.filter = 'sepia(' + sepiaValue + ')';
             }
         </script>
 
