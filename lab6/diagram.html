@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            #diag {
+                display: flex;
+                align-items: flex-end;
+                gap: 10px;
+                height: 300px;
+                padding: 20px;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            .bar {
+                width: 30px;
+                background-color: #333132;
+                border-radius: 3px 3px 0 0;
+                position: relative;
+                text-align: center;
+                color: white;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+            }
+            
+            .bar-value {
+                position: absolute;
+                bottom: -20px;
+                left: 0;
+                right: 0;
+                color: black;
+            }
+        </style>
+    </head>
+    <body onload="showDiagram()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+
+        <main>
+            <div id="diag">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+        <script>
+            function showDiagram() {
+                let data = [36,86,55,28,92,60,41,17,9,43];
+                let colors = ['#4e4e59','#85818c', '#6b6773', '#6c6874','#535059','#39373d','#212024','#070708', '#1f1f24', '#070708'];
+                let bars = document.getElementsByClassName('bar');
+                const diagHeight = document.getElementById('diag').clientHeight;
+                const maxData = Math.max(...data);
+                
+                for (let i = 0; i < data.length; i++) {
+
+                    bars[i].style.height = (data[i] / maxData * diagHeight * 0.9) + 'px';
+                    bars[i].style.backgroundColor = colors[i];
+                    
+                    let valueSpan = document.createElement('span');
+                    valueSpan.className = 'bar-value';
+                    valueSpan.textContent = data[i];
+                    bars[i].appendChild(valueSpan);
+
+                    bars[i].textContent = data[i];
+                }
+            }
+        </script>
+    </body>
+</html>
