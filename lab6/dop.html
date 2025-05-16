@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            .chart-container {
+                margin-bottom: 30px;
+            }
+            .chart {
+                display: flex;
+                height: 300px;
+                align-items: flex-end;
+                gap: 2px;
+                border-bottom: 1px solid #333;
+                padding-top: 100px; 
+            }
+            .bar-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex-grow: 1;
+            }
+            .bar {
+                width: 20px;
+                background-color: #ba1277;
+                transition: background-color 0.3s;
+                position: relative;
+            }
+            .bar.min {
+                background-color: #b196ac;
+            }
+            .bar.highlight {
+                background-color: #6e2e3e;
+            }
+            .bar.min.highlight {
+                background-color: #6b5d62;
+            }
+            .day-label {
+                margin-top: 5px;
+                font-size: 12px;
+            }
+            .controls {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            input {
+                padding: 8px;
+                width: 60px;
+                text-align: center;
+                font-size: 16px;
+            }
+            .day-info {
+                margin-top: 15px;
+                font-size: 18px;
+                text-align: center;
+                min-height: 50px;
+            }
+            .legend {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-bottom: 15px;
+            }
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .legend-color {
+                width: 20px;
+                height: 20px;
+            }
+            .diagram-page {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+
+        <main>
+
+            <div class="diagram-page">
+                <h1>Температуры за месяц</h1>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #ba1277;;"></div>
+                        <span>Минимальная</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color:#b196ac ;"></div>
+                        <span>Максимальная</span>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart" id="chart"></div>
+                </div>
+                
+                <div class="controls">
+                    <label for="day-input">Введите номер дня (1-30):</label>
+                    <input type="number" id="day-input" min="1" max="30" value="1">
+                    <div class="day-info" id="day-info"></div>
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const chart = document.getElementById('chart');
+                const dayInput = document.getElementById('day-input');
+                const dayInfo = document.getElementById('day-info');
+                
+                // Генерируем случайные температуры для каждого дня (без отрицательных значений)
+                const days = 30;
+                const temperatures = [];
+                
+                for (let i = 0; i < days; i++) {
+                    const minTemp = Math.floor(Math.random() * 15); // от 0 до +15
+                    const maxTemp = minTemp + Math.floor(Math.random() * 10) + 5; // минимум +5 от min
+                    temperatures.push({ min: minTemp, max: maxTemp, day: i + 1 });
+                }
+                
+                // Находим максимальную температуру для масштабирования
+                const maxChartTemp = Math.max(...temperatures.map(t => t.max));
+                const scaleFactor = 250 / maxChartTemp; // Уменьшил множитель, чтобы столбцы были ниже
+                
+                // Создаем диаграмму
+                temperatures.forEach(temp => {
+                    const barContainer = document.createElement('div');
+                    barContainer.className = 'bar-container';
+                    
+                    const maxBar = document.createElement('div');
+                    maxBar.className = 'bar';
+                    maxBar.style.height = `${temp.max * scaleFactor}px`;
+                    maxBar.dataset.day = temp.day;
+                    maxBar.dataset.temp = temp.max;
+                    maxBar.dataset.type = 'max';
+                    
+                    const minBar = document.createElement('div');
+                    minBar.className = 'bar min';
+                    minBar.style.height = `${temp.min * scaleFactor}px`;
+                    minBar.dataset.day = temp.day;
+                    minBar.dataset.temp = temp.min;
+                    minBar.dataset.type = 'min';
+                    
+                    const dayLabel = document.createElement('div');
+                    dayLabel.className = 'day-label';
+                    dayLabel.textContent = temp.day;
+                    
+                    barContainer.appendChild(maxBar);
+                    barContainer.appendChild(minBar);
+                    barContainer.appendChild(dayLabel);
+                    chart.appendChild(barContainer);
+                });
+                
+                // Обработчик ввода дня
+                dayInput.addEventListener('input', function() {
+                    const day = parseInt(this.value);
+                    
+                    // Проверяем корректность ввода
+                    if (isNaN(day) || day < 1 || day > 30) {
+                        dayInfo.textContent = 'Пожалуйста, введите число от 1 до 30';
+                        return;
+                    }
+                    
+                    // Снимаем выделение со всех столбцов
+                    document.querySelectorAll('.bar').forEach(bar => {
+                        bar.classList.remove('highlight');
+                    });
+                    
+                    // Находим температуру для выбранного дня
+                    const dayTemp = temperatures.find(t => t.day === day);
+                    
+                    // Подсвечиваем выбранный день
+                    document.querySelectorAll(`.bar[data-day="${day}"]`).forEach(bar => {
+                        bar.classList.add('highlight');
+                    });
+                    
+                    // Выводим информацию
+                    dayInfo.textContent = `День ${day}: Минимальная ${dayTemp.min}°C, Максимальная ${dayTemp.max}°C`;
+                });
+                
+                // Инициализируем первый день
+                dayInput.dispatchEvent(new Event('input'));
+            });
+        </script>
+    </body>
+</html>
