@@ -11,7 +11,6 @@
             body {
                 font-family: Arial, sans-serif;
                 line-height: 1.5;
-
             }
             .date-block {
                 margin-bottom: 10px;
@@ -25,8 +24,21 @@
             .date-time {
                 color: #333;
             }
+            .buttons {
+                margin: 20px 0;
+            }
+            header {
+                transition: color 0.5s ease; 
+            }
+            button {
+                padding: 8px 15px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
         </style>
         <script>
+            let colorInterval;
+            
             function showDates() {
                 const today = new Date();
                 const locales = [
@@ -59,6 +71,25 @@
                 
                 document.getElementById('dates-container').innerHTML = html;
             }
+            
+            function changeColors() {
+                const header = document.getElementsByTagName('header')[0];
+                const rgb = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+                header.style.color = rgb;
+            }
+            
+            function startChangeColors() {
+                changeColors();
+                colorInterval = setInterval(changeColors, 1000); 
+                document.getElementById('start-btn').disabled = true;
+                document.getElementById('stop-btn').disabled = false;
+            }
+            
+            function stopChangeColors() {
+                clearInterval(colorInterval);
+                document.getElementById('start-btn').disabled = false;
+                document.getElementById('stop-btn').disabled = true;
+            }
         </script>
     </head>
     <body onload="showDates()">
@@ -67,8 +98,12 @@
             <hr>
         </header>
 
-        <main id="dates-container">
-
+        <main>
+            <div class="buttons">
+                <button onclick="startChangeColors()" id="start-btn">Старт</button>
+                <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+            </div>
+            <div id="dates-container"></div>
         </main>
     
         <footer>
