@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.5;
+
+            }
+            .date-block {
+                margin-bottom: 10px;
+                padding: 8px 0;
+            }
+            .country {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 3px;
+            }
+            .date-time {
+                color: #333;
+            }
+        </style>
+        <script>
+            function showDates() {
+                const today = new Date();
+                const locales = [
+                    { code: 'ru-RU', name: 'Россия' },
+                    { code: 'en-US', name: 'США' },
+                    { code: 'de-DE', name: 'Германия' },
+                    { code: 'ja-JP', name: 'Япония' },
+                    { code: 'fr-FR', name: 'Франция' }
+                ];
+                
+                let html = '<h2>Текущая дата и время</h2>';
+                
+                locales.forEach(locale => {
+                    const dateTimeStr = today.toLocaleString(locale.code, {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    });
+                    
+                    html += `
+                        <div class="date-block">
+                            <span class="country">${locale.name}</span>
+                            <span class="date-time">${dateTimeStr}</span>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('dates-container').innerHTML = html;
+            }
+        </script>
+    </head>
+    <body onload="showDates()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+
+        <main id="dates-container">
+
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
