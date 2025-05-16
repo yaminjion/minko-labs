@@ -38,6 +38,7 @@
         </style>
         <script>
             let colorInterval;
+            let timeInterval;
             
             function showDates() {
                 const today = new Date();
@@ -90,6 +91,19 @@
                 document.getElementById('start-btn').disabled = false;
                 document.getElementById('stop-btn').disabled = true;
             }
+            
+            function startTimeUpdate() {
+                showDates();
+                timeInterval = setInterval(showDates, 1000);
+                document.getElementById('update-time-btn').disabled = true;
+                document.getElementById('stop-time-btn').disabled = false;
+            }
+            
+            function stopTimeUpdate() {
+                clearInterval(timeInterval);
+                document.getElementById('update-time-btn').disabled = false;
+                document.getElementById('stop-time-btn').disabled = true;
+            }
         </script>
     </head>
     <body onload="showDates()">
@@ -102,6 +116,8 @@
             <div class="buttons">
                 <button onclick="startChangeColors()" id="start-btn">Старт</button>
                 <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+                <button onclick="startTimeUpdate()" id="update-time-btn">Обновлять время</button>
+                <button onclick="stopTimeUpdate()" disabled id="stop-time-btn">Остановить обновление</button>
             </div>
             <div id="dates-container"></div>
         </main>
