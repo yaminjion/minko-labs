@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <script src="books.js"></script>
+        <style>
+            .book {
+                margin-bottom: 15px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .bestseller {
+                background-color: #fff8e1;
+                border-left: 4px solid #ffc107;
+            }
+            .out-of-stock {
+                opacity: 0.6;
+            }
+            .price {
+                color: #2e7d32;
+                font-weight: bold;
+            }
+            .bestseller-badge {
+                background-color: #ffc107;
+                color: #000;
+                padding: 2px 5px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                margin-left: 5px;
+            }
+            .out-of-stock-badge {
+                color: #d32f2f;
+                font-style: italic;
+            }
+        </style>
+        <script>
+            function showBooks() {
+                const bookList = document.getElementById('bookList');
+                for(let i = 0; i < books.length; i++) {
+                    const book = books[i];
+                    let bookClass = "book";
+                    let badges = "";
+                    
+                    if(book.bestseller) {
+                        bookClass += " bestseller";
+                        badges += `<span class="bestseller-badge">Бестселлер</span>`;
+                    }
+                    
+                    if(!book.inStock) {
+                        bookClass += " out-of-stock";
+                    }
+                    
+                    bookList.innerHTML += `
+                        <div class="${bookClass}">
+                            <div><b>${book.author}.</b> ${book.name}</div>
+                            <div>Год издания: ${book.publicationYear}</div>
+                            <div class="price">Цена: ${book.price} руб.</div>
+                            ${!book.inStock ? '<div class="out-of-stock-badge">Нет в наличии</div>' : ''}
+                            ${badges}
+                        </div>
+                    `;
+                }
+            }
+        </script>
+    </head>
+    <body onload="showBooks()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+
+        <main>
+            <h1>Список книг</h1>
+            <div id="bookList"></div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
