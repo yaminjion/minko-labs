@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 7</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            .stocks-table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+            .stocks-table th, .stocks-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            .stocks-table th {
+                background-color: #f2f2f2;
+            }
+            .positive {
+                color: green;
+            }
+            .negative {
+                color: red;
+            }
+            .show-stocks-btn {
+                padding: 10px 15px;
+                background-color: #ba1e8e;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 20px;
+            }
+            .show-stocks-btn:hover {
+                background-color: #8b196a;
+            }
+            .stats {
+                margin-top: 20px;
+                padding: 10px;
+                background-color: #f9f9f9;
+                border-left: 4px solid #ba1e8e;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 7
+            <hr>
+        </header>
+
+        <main>
+            <button class="show-stocks-btn" id="showStocks">Курс акций Черкизово</button>
+            <div id="stocksTable"></div>
+        </main>
+    
+
+        <script>
+            document.getElementById('showStocks').addEventListener('click', function() {
+                const stockData = [
+                    { date: '13.05.2025', price: 3841.00 },
+                    { date: '14.05.2025', price: 3827.00 },
+                    { date: '15.05.2025', price: 3755.00 },
+                    { date: '16.05.2025', price: 3731.00 },
+                    { date: '19.05.2025', price: 3747.00 },
+                    { date: '20.05.2025', price: 3702.00 },
+                    { date: '21.05.2025', price: 3676.00 },
+                    { date: '22.05.2025', price: 3631.00 },
+                    { date: '23.05.2025', price: 3598.00 }
+                ];
+                
+                // Создаем таблицу
+                let tableHTML = `
+                    <table class="stocks-table">
+                        <tr>
+                            <th>Дата</th>
+                            <th>Цена акций</th>
+                            <th>Разница</th>
+                        </tr>
+                `;
+                
+                // Рассчитываем разницы и заполняем таблицу
+                let sum = 0;
+                let minPrice = Number.MAX_VALUE;
+                let maxPrice = Number.MIN_VALUE;
+                
+                stockData.forEach((item, index) => {
+                    sum += item.price;
+                    minPrice = Math.min(minPrice, item.price);
+                    maxPrice = Math.max(maxPrice, item.price);
+                    
+                    let difference = '';
+                    let diffClass = '';
+                    
+                    if (index > 0) {
+                        const diffValue = item.price - stockData[index - 1].price;
+                        if (diffValue > 0) {
+                            difference = `+${diffValue.toFixed(2)}`;
+                            diffClass = 'positive';
+                        } else if (diffValue < 0) {
+                            difference = `${diffValue.toFixed(2)}`;
+                            diffClass = 'negative';
+                        } else {
+                            difference = '0.00';
+                        }
+                    }
+                    
+                    tableHTML += `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td>${item.price.toFixed(2)}</td>
+                            <td class="${diffClass}">${difference}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableHTML += `</table>`;
+                
+                // Рассчитываем среднее значение
+                const average = sum / stockData.length;
+                
+                // Добавляем статистику
+                tableHTML += `
+                    <div class="stats">
+                        <p><strong>Среднее значение стоимости акции:</strong> ${average.toFixed(2)}</p>
+                        <p><strong>Максимальное значение:</strong> ${maxPrice.toFixed(2)}</p>
+                        <p><strong>Минимальное значение:</strong> ${minPrice.toFixed(2)}</p>
+                    </div>
+                `;
+                
+                // Вставляем таблицу
+                document.getElementById('stocksTable').innerHTML = tableHTML;
+            });
+        </script>
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
