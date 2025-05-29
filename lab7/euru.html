@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Минько Елена Михайловна. Лабораторная 7</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16.png">
+        <link rel="icon" href="../favicon-32x32.png">
+        <style>
+            button {
+                padding: 10px 15px;
+                background-color: #b23781;
+                color: rgb(242, 229, 229);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-bottom: 20px;
+                transition: background-color 0.3s ease;
+            }
+            
+            button:hover {
+                background-color: #6d3657;
+            }
+
+            .exchange-rate-container {
+                margin: 20px 0;
+                padding: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                max-width: 500px;
+            }
+            .exchange-rate-title {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #333;
+            }
+            .exchange-rate-value {
+                font-size: 24px;
+                font-weight: bold;
+                color: #2c3e50;
+                margin: 10px 0;
+            }
+            .exchange-rate-date {
+                font-size: 14px;
+                color: #7f8c8d;
+                margin-bottom: 10px;
+            }
+            .exchange-rate-difference {
+                font-size: 16px;
+                padding: 5px;
+                border-radius: 3px;
+                margin-top: 10px;
+            }
+            .increase {
+                color: #27ae60;
+                background-color: #e8f5e9;
+            }
+            .decrease {
+                color: #e74c3c;
+                background-color: #ffebee;
+            }
+            .no-change {
+                color: #7f8c8d;
+                background-color: #ecf0f1;
+            }
+            .source-link {
+                margin-top: 15px;
+                font-size: 12px;
+                color: #3498db;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 7
+            <hr>
+        </header>
+
+        <main>
+            <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+            <div id="result"></div>
+        </main>
+    
+        <footer>
+            <hr>
+            &copy; Елена Минько, ФБИ-34, 2 курс, 2025
+        </footer>
+
+        <script>
+            function getEuroExchangeRate() {
+                const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+                fetch(url)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(json) {
+                        displayExchangeRate(json);
+                    })
+                    .catch(function(error) {
+                        console.error('Ошибка при получении данных:', error);
+                        document.getElementById('result').innerHTML = 
+                            '<div class="exchange-rate-container">' +
+                            '   <div class="exchange-rate-title">Ошибка при получении данных</div>' +
+                            '</div>';
+                    });
+            }
+
+            function displayExchangeRate(data) {
+                const eur = data.Valute.EUR;
+                const currentRate = eur.Value.toFixed(2);
+                const previousRate = eur.Previous.toFixed(2);
+                const date = new Date(data.Date).toLocaleDateString('ru-RU');
+                const difference = (eur.Value - eur.Previous).toFixed(2);
+                
+                let differenceClass = 'no-change';
+                let differenceText = 'без изменений';
+                
+                if (difference > 0) {
+                    differenceClass = 'increase';
+                    differenceText = '↑ поднялся на ' + difference;
+                } else if (difference < 0) {
+                    differenceClass = 'decrease';
+                    differenceText = '↓ опустился на ' + Math.abs(difference);
+                }
+
+                const resultHtml = 
+                    '<div class="exchange-rate-container">' +
+                    '   <div class="exchange-rate-title">Курс евро ЦБ РФ</div>' +
+                    '   <div class="exchange-rate-value">' + currentRate + ' ₽</div>' +
+                    '   <div class="exchange-rate-date">Дата: ' + date + '</div>' +
+                    '   <div>Предыдущий курс: ' + previousRate + ' ₽</div>' +
+                    '   <div class="exchange-rate-difference ' + differenceClass + '">' + differenceText + '</div>' +
+                    '   <div class="source-link">Источник: <a href="https://www.cbr-xml-daily.ru/" target="_blank">ЦБ РФ</a></div>' +
+                    '</div>';
+
+                document.getElementById('result').innerHTML = resultHtml;
+            }
+        </script>
+    </body>
+</html>
