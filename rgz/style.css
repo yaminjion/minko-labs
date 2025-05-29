@@ -1,16 +1,71 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row; 
+}
 
 .sidebar {
-    width: 375px;
+    width: 230px;
     background-color: #000;
     color: white;
-    padding: 20px 0; 
+    padding: 20px 0;
     position: sticky;
     top: 0;
     height: 100vh;
-    order: 2;
     overflow-y: auto;
+    flex-shrink: 0; 
 }
 
+.content {
+    flex-grow: 1; 
+    overflow-x: hidden; 
+}
+
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 300px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px 0;
+    }
+    
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .menu li {
+        flex: 1 0 auto;
+        text-align: center;
+    }
+    
+    .menu li a {
+        padding: 10px 15px;
+    }
+    
+    .menu li.active {
+        border-left: none;
+        border-bottom: 4px solid white;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu li {
+        flex-basis: 100%;
+    }
+}
 .logo {
     text-align: center;
     margin-bottom: 30px;
@@ -21,6 +76,7 @@
     max-width: 100%;
     height: auto;
     max-height: 100px;
+    object-fit: contain;
 }
 
 .menu {
@@ -155,25 +211,6 @@ section h1 {
                 height: 300px;
             }
         }
-        @media (max-width: 768px) {
-            .service-container {
-                flex-direction: column;
-                min-height: auto;
-            }
-            .service-image img {
-                width: 100%;
-                height: auto;
-                max-height: 300px;
-                margin-bottom: 30px;
-            }
-            h2, p {
-                padding-left: 0;
-                text-align: center;
-            }
-            .service-text {
-                padding: 0;
-            }
-        }
 body {
     background-color: #f5f5f5;
     color: #333;
@@ -184,10 +221,6 @@ body {
     background-attachment: scroll;
 }
 
-.container {
-    display: flex;
-    min-height: 100vh;
-}
 
 /* Основное содержимое с затемненным фоном */
 .hero {
@@ -432,8 +465,6 @@ body {
         padding: 15px;
     }
 }
-
-
         /* Кнопка "Наверх" */
         .to-top {
             position: fixed;
