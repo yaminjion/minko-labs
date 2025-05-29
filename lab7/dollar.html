@@ -8,6 +8,37 @@
         <link rel="icon" href="../favicon-16x16.png">
         <link rel="icon" href="../favicon-32x32.png">
         <script src = "dollar-data.js"></script>
+        <style>
+            button {
+                padding: 10px 15px;
+                background-color: #b23781;
+                color: rgb(242, 229, 229);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-bottom: 20px;
+                transition: background-color 0.3s ease;
+            }
+            
+            button:hover {
+                background-color: #6d3657;
+            }
+            
+            #dollar-table {
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            
+            #dollar-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            
+            #detail {
+                font-weight: bold;
+                color: #b23781;
+            }
+        </style>
         <script>
             function showExchange() {
                 let table = document.getElementById('dollar-table');
@@ -40,7 +71,7 @@
 
         <main>
             <button onclick="showExchange()">Курс доллара</button>
-            <table border ="1" id="dollar-table"></table>
+            <table id="dollar-table"></table>
             <div id="detail"></div>
         </main>
     
