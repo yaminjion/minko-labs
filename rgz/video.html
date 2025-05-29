@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/fav.png">
+    <title>Евротранс | Видео</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .container {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    .content {
+        flex: 1;
+        padding: 40px;
+        background-color: #fff;
+        margin-right: 250px; 
+    }
+
+
+    .sidebar {
+        width: 250px;
+        background-color: #000;
+        color: white;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 0 20px;
+    }
+
+    .logo img {
+        max-width: 100%;
+        height: auto;
+        max-height: 100px;
+    }
+
+    .menu {
+        list-style: none;
+        margin-bottom: 30px;
+    }
+
+    .menu li {
+        transition: background-color 0.3s;
+    }
+
+    .menu li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 15px 25px;
+    }
+
+    .menu li:hover {
+        background-color: #333;
+    }
+
+    .menu li.active {
+        background-color: #000;
+        border-left: 4px solid white;
+    }
+
+    .video-title {
+        color: #000;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #000;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%; 
+        max-width: 800px; 
+        margin: 0 auto 30px; 
+        padding-bottom: 30%; 
+        height: 0;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .video-description {
+        width: 70%; 
+        max-width: 800px;
+        margin: 0 auto 30px;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-left: 4px solid #000;
+    }
+
+    .video-description h3 {
+        color: #000;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+
+    /* Адаптивность */
+    @media (max-width: 1024px) {
+        .video-wrapper,
+        .video-description {
+            width: 85%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+        
+        .content {
+            margin-right: 0;
+            padding: 20px;
+        }
+        
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+        
+        .video-wrapper,
+        .video-description {
+            width: 100%;
+            padding-bottom: 56.25%; 
+        }
+
+        .to-top {
+            right: 30px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="content">
+    <h1 class="video-title">Видео о компании Евротранс</h1>
+    
+    <div class="video-description">
+      <h3>Евротранс - надежные грузоперевозки</h3>
+      <p>Официальный видеоролик компании, рассказывающий о наших услугах, парке транспортных средств и преимуществах работы с нами.</p>
+    </div>
+    
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/IW27otkN09s" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+  </div>
+  
+  <div class="sidebar">
+    <div class="logo">
+      <img src="images/logo.png" alt="Логотип Евротранс">
+    </div>
+    
+    <ul class="menu">
+      <li><a href="index.html">О компании</a></li>
+      <li><a href="news.html">Новости</a></li>
+      <li><a href="currency.html">Курс валют</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+      <li class="active"><a href="video.html">Видео</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+

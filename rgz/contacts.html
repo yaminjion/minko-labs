@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕВРОТРАНС - Контакты</title>
+    <link rel="icon" href="images/fav.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            background-color: #fff;
+        }
+
+        /* Сайдбар (меню справа) */
+        .sidebar {
+            width: 232px;
+            background-color: #000;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            order: 2;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100px;
+        }
+
+        .menu {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .menu li {
+            transition: background-color 0.3s;
+        }
+
+        .menu li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .menu li:hover {
+            background-color: #333;
+        }
+
+        .menu li.active {
+            background-color: #000;
+            border-left: 4px solid white;
+        }
+
+
+        .to-top:hover {
+            background-color: #333;
+        }
+
+        h1 {
+            color: #d10000;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contacts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 400px;
+            border-left: 4px solid #d10000;
+        }
+
+        .contact-card h2 {
+            color: #d10000;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .contact-info {
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .contact-info strong {
+            color: #000;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 500px;
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pickup-points {
+            margin-top: 40px;
+        }
+
+        .pickup-points h2 {
+            color: #d10000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .point-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .point-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>Контакты</h1>
+            
+            <div class="contacts-container">
+                <div class="contact-card">
+                    <h2>Офис в Иркутске</h2>
+                    <div class="contact-info">
+                        <p><strong>Адрес:</strong> г. Иркутск, ул. Розы Люксембург, 180</p>
+                        <p><strong>Часы работы:</strong> с 09:00 до 17:00 (ИКТ)</p>
+                        <p><strong>Телефоны:</strong></p>
+                        <p>+7(914) 900-13-63</p>
+                        <p>+7(914) 900-18-64</p>
+                        <p>+7(914) 900-57-67</p>
+                        <p><strong>Email:</strong> irkutsk@eurotrans.su</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h2>Офис в Новосибирске</h2>
+                    <div class="contact-info">
+                        <p><strong>Адрес:</strong> г. Новосибирск, п. Садовый, ул. Пасечная, 1А</p>
+                        <p><strong>Часы работы:</strong> с 09:00 до 17:00 (НСК)</p>
+                        <p><strong>Телефоны:</strong></p>
+                        <p>+7(914) 900-18-64</p>
+                        <p>+7(914) 900-13-63</p>
+                        <p>+7(914) 900-57-67</p>
+                        <p><strong>Email:</strong> novosib@eurotrans.su</p>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h2>Офис в Красноярске</h2>
+                    <div class="contact-info">
+                        <p><strong>Адрес:</strong> г. Красноярск, ул. Ястынская, 47Б/10 - 25</p>
+                        <p><strong>Часы работы:</strong> с 09:00 до 17:00 (КРСК)</p>
+                        <p><strong>Телефоны:</strong></p>
+                        <p>+7(914) 900-57-67</p>
+                        <p>+7(914) 900-13-63</p>
+                        <p>+7(914) 900-18-64</p>
+                        <p><strong>Email:</strong> kras@eurotrans.su</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p&amp;source=constructor" frameborder="0"></iframe>
+            </div>
+
+            <div class="pickup-points">
+                <h2>Пункты выдачи</h2>
+                <div class="points-grid">
+                    <div class="point-item">Новосибирск</div>
+                    <div class="point-item">Красноярск</div>
+                    <div class="point-item">Иркутск</div>
+                    <div class="point-item">Улан-Удэ</div>
+                    <div class="point-item">Чита</div>
+                    <div class="point-item">Братск</div>
+                    <div class="point-item">Усть-Илимск</div>
+                    <div class="point-item">Усть-Кут</div>
+                </div>
+            </div>
+
+        </main>
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип ЕВРОТРАНС">
+            </div>
+            <ul class="menu">
+                <li><a href="index.html">О компании</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="currency.html">Курс валют</a></li>
+                <li class="active"><a href="contacts.html">Контакты</a></li>
+                <li><a href="video.html">Видео</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕВРОТРАНС - Курс валют</title>
+    <link rel="icon" href="images/fav.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Сайдбар (меню справа) */
+        .sidebar {
+            width: 250px;
+            background-color: #000000;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100px;
+        }
+
+        .menu {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .menu li {
+            transition: background-color 0.3s;
+        }
+
+        .menu li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 25px;
+        }
+
+        .menu li:hover {
+            background-color: #666666;
+        }
+
+        .menu li.active {
+            background-color: #000000;
+            border-left: 4px solid #ffffff;
+        }
+
+        h1, h2 {
+            color: #000000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calc-container {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        input {
+            padding: 8px;
+            margin: 8px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            width: 180px;
+            background: #ffffff;
+            color: #333333;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 8px;
+            border: none;
+            background: #d10000;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #ff3333;
+        }
+
+        #chart {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            display: block;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .rate-info {
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: #333333;
+            text-align: center;
+        }
+
+        .to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: #d10000;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            z-index: 100;
+            display: none;
+        }
+
+        .to-top:hover {
+            background-color: #ff3333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="currency-page">
+    <div class="wrapper">
+        <div class="container">
+            <main class="content">
+                <h1>Калькулятор: RUB ⇄ BYN</h1>
+                
+                <div class="rate-info">
+                    Текущий курс: <span id="rate">загрузка...</span>
+                </div>
+
+                <div class="calc-container">
+                    <div>
+                        <label>Российские рубли (RUB): 
+                            <input type="number" id="rub" placeholder="Введите RUB" min="0">
+                        </label>
+                        <button onclick="toByn()">→ BYN</button>
+                    </div>
+                    <div>
+                        <label>Белорусские рубли (BYN): 
+                            <input type="number" id="byn" placeholder="Введите BYN" min="0">
+                        </label>
+                        <button onclick="toRub()">→ RUB</button>
+                    </div>
+                    <p id="result" style="font-weight:bold; margin-top:15px; color:#d10000;"></p>
+                </div>
+
+                <h2>Динамика курса за месяц</h2>
+                <canvas id="chart" width="800" height="400"></canvas>
+            </main>
+
+            <nav class="sidebar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Логотип ЕВРОТРАНС">
+                </div>
+                <ul class="menu">
+                    <li><a href="index.html">О компании</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li class="active"><a href="currency.html">Курс валют</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="video.html">Видео</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <a href="#" class="to-top">↑</a>
+
+    <script>
+        let rate = null;
+        let chart = null;
+
+        // Загрузка курса
+        async function loadRate() {
+            try {
+                const res = await fetch("https://www.cbr-xml-daily.ru/daily_json.js");
+                const data = await res.json();
+                rate = data.Valute.BYN.Value / data.Valute.BYN.Nominal;
+                document.getElementById("rate").innerHTML = 
+                    `1 BYN = ${rate.toFixed(4)} RUB<br>
+                     1 RUB = ${(1/rate).toFixed(4)} BYN`;
+            } catch (error) {
+                document.getElementById("rate").textContent = 
+                    "Ошибка загрузки курса. Используется курс 1 BYN = 28.50 RUB";
+                rate = 28.50; // Значение по умолчанию
+            }
+        }
+
+        // Валидация ввода
+        function valid(num) {
+            return num !== "" && !isNaN(num) && parseFloat(num) >= 0;
+        }
+
+        // Конвертация RUB → BYN
+        async function toByn() {
+            if (!rate) await loadRate();
+            const rub = document.getElementById("rub").value;
+            
+            if (!valid(rub)) {
+                document.getElementById("result").textContent = "Введите корректную сумму в RUB";
+                return;
+            }
+            
+            const res = parseFloat(rub) / rate;
+            document.getElementById("result").innerHTML = 
+                `<strong>${rub} RUB = ${res.toFixed(2)} BYN</strong>`;
+            document.getElementById("byn").value = res.toFixed(2);
+        }
+
+        // Конвертация BYN → RUB
+        async function toRub() {
+            if (!rate) await loadRate();
+            const byn = document.getElementById("byn").value;
+            
+            if (!valid(byn)) {
+                document.getElementById("result").textContent = "Введите корректную сумму в BYN";
+                return;
+            }
+            
+            const res = parseFloat(byn) * rate;
+            document.getElementById("result").innerHTML = 
+                `<strong>${byn} BYN = ${res.toFixed(2)} RUB</strong>`;
+            document.getElementById("rub").value = res.toFixed(2);
+        }
+
+        // Загрузка данных для графика
+        async function loadChart() {
+                let labels = [];
+                let data = [];
+
+                for (let i = 30; i >= 0; i--) {
+                    let date = new Date();
+                    date.setDate(date.getDate() - i);
+                    let dd = String(date.getDate()).padStart(2, '0');
+                    let mm = String(date.getMonth() + 1).padStart(2, '0');
+                    let yyyy = date.getFullYear();
+                    let url = `https://www.cbr-xml-daily.ru/archive/${yyyy}/${mm}/${dd}/daily_json.js`;
+
+                    try {
+                        const res = await fetch(url);
+                        if (res.ok) {
+                            const json = await res.json();
+                            let dayRate = json.Valute.BYN.Value / json.Valute.BYN.Nominal;
+                            labels.push(`${dd}.${mm}`);
+                            data.push(dayRate);
+                        }
+                    } catch {
+                        console.log(`Нет данных за ${dd}.${mm}.${yyyy}`);
+                    }
+                }
+
+                draw(labels, data);
+            }
+
+            function draw(labels, data) {
+                const ctx = document.getElementById('chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'BYN к RUB',
+                            data: data,
+                            backgroundColor: 'rgba(209, 0, 0, 0.5)',
+                            borderColor: 'rgba(209, 0, 0, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        onClick: (e, el) => {
+                            if (el.length > 0) {
+                                const i = el[0].index;
+                                alert(`Дата: ${labels[i]}\nКурс: ${data[i].toFixed(4)} ₽`);
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                grid: {
+                                    color: '#f0f0f0'
+                                },
+                                ticks: {
+                                    color: '#333333'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: '#f0f0f0'
+                                },
+                                ticks: {
+                                    color: '#333333'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#333333'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            loadRate();
+            loadChart();
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRate();
+            loadChart();
+            
+            // Кнопка "наверх"
+            window.addEventListener('scroll', function() {
+                const toTop = document.querySelector('.to-top');
+                if (window.pageYOffset > 300) {
+                    toTop.style.display = 'block';
+                } else {
+                    toTop.style.display = 'none';
+                }
+            });
+            
+            document.querySelector('.to-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        });
+    </script>
+</body>
+</html>
