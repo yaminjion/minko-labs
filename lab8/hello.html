@@ -43,8 +43,14 @@
                                 <button @click="edit(id, flower)" class="btn btn-sm btn-warning float-end">
                                     <i class="bi bi-pencil"></i>
                                 </button>
+                                <button @click="remove(id)" class="btn btn-sm btn-danger float-end me-1">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </li>
                         </ul>
+                        <button @click="addFlower" class="btn btn-success mt-2">
+                            <i class="bi bi-plus-circle"></i> Добавить цветок
+                        </button>
                     </div>  
                 </div>
                 <hr>
@@ -54,6 +60,7 @@
                         <tr>
                             <th>Название</th>
                             <th>Редактировать</th>
+                            <th>Удалить</th>
                         </tr>
                     </thead>
                     <tr v-for="(flower, id) in flowers">
@@ -66,6 +73,11 @@
                                 <i class="bi bi-pencil-fill"></i>
                             </button>
                             <div class="spinner-border text-info-emphasis" role="status" v-if="flower === null"></div>
+                        </td>
+                        <td>
+                            <button @click="remove(id)" class="btn btn-danger" v-if="flower !== null">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -127,6 +139,15 @@
                         setTimeout(() => {
                             this.flowers[id]=newName;
                         }, 3000)
+                    },
+                    remove(id) {
+                        this.flowers.splice(id, 1);
+                    },
+                    addFlower() {
+                        let newFlower = prompt('Введите название нового цветка:');
+                        if (newFlower) {
+                            this.flowers.push(newFlower);
+                        }
                     },
                     sum() {
                         this.result = this.a +this.b;
