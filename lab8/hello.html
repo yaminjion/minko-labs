@@ -22,8 +22,12 @@
             <div id="app">
                 <h1 :title="messageRus">{{ message }}</h1>
                 <p>Счётчик: {{ counter }}</p>
-                <button @click="incCounter" v-if="counter < 10">++</button>
-                <button @click="decCounter" v-if="counter > 0">--</button>                
+                <button @click="incCounter" class="btn text-white" style="background-color: rgb(215, 146, 157);" v-if="counter < 10">
+                    Увеличить
+                </button>
+                <button @click="decCounter" class="btn btn-secondary" v-if="counter > 0">
+                    Уменьшить
+                </button>                
                 <hr>
                 <h2>Пользователь:</h2>
                 <div>Имя: {{ user.name }}</div>
@@ -32,16 +36,19 @@
                 <hr>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h2 class="card-title">Цветы</h2>
+                        <h2 class="card-title"><i class="bi bi-flower3"></i> Цветы</h2>
                         <ul class="list-group">
                             <li v-for="(flower, id) in flowers" class="list-group-item">
-                                {{flower}}<button @click="edit(id, flower)">?</button>
+                                {{flower}}
+                                <button @click="edit(id, flower)" class="btn btn-sm btn-warning float-end">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
                             </li>
                         </ul>
                     </div>  
                 </div>
                 <hr>
-                <h2>Цветы</h2>
+                <h2><i class="bi bi-flower3"></i> Цветы</h2>
                 <table class="table table-danger">
                     <thead>
                         <tr>
@@ -55,13 +62,15 @@
                             <span v-else>{{flower}}</span>
                         </td>
                         <td>
-                            <button @click="edit(id, flower)" class="btn btn-primary" v-if="flower !== null"><i class="bi bi-pencil-fill"></i></button>
+                            <button @click="edit(id, flower)" class="btn btn-primary" v-if="flower !== null">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
                             <div class="spinner-border text-info-emphasis" role="status" v-if="flower === null"></div>
                         </td>
                     </tr>
                 </table>
                 <hr>
-                <h2>Калькулятор</h2>
+                <h2>Калькулятор <i class="bi bi-calculator"></i></h2>
                 <div class="row g-5">
                     <div class="col-auto">
                         <input type="number" v-model="a" class="form-control">
@@ -79,6 +88,7 @@
                         <span class="badge text-bg-primary fs-5">{{result}}</span>
                     </div>
                 </div>
+                <div style="margin-bottom: 100px;"></div>
             </div>
         </main>
     
