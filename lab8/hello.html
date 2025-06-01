@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Минько Елена Михайловна. Лабораторная 8 </title>
+        <title>Минько Елена Михайловна. Лабораторная 8</title>
         <link rel="stylesheet" href="../main.css">
         <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
         <link rel="icon" href="../favicon-16x16.png">
@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Цветы</h2>
                         <ul class="list-group">
-                            <li v-for="(flower, id) in flowers" class = "list-group-item">
+                            <li v-for="(flower, id) in flowers" class="list-group-item">
                                 {{flower}}<button @click="edit(id, flower)">?</button>
                             </li>
                         </ul>
@@ -51,29 +51,31 @@
                     </thead>
                     <tr v-for="(flower, id) in flowers">
                         <td>
-                            {{ flower }}
+                            <span v-if="flower === null">загружается...</span>
+                            <span v-else>{{flower}}</span>
                         </td>
                         <td>
-                            <button @click="edit(id, flower)" class = "btn btn-primary"><i class="bi bi-pencil-fill"></i></button>
+                            <button @click="edit(id, flower)" class="btn btn-primary" v-if="flower !== null"><i class="bi bi-pencil-fill"></i></button>
+                            <div class="spinner-border text-info-emphasis" role="status" v-if="flower === null"></div>
                         </td>
                     </tr>
                 </table>
                 <hr>
                 <h2>Калькулятор</h2>
                 <div class="row g-5">
-                    <div class = "col-auto">
-                        <input  type="number" v-model="a" class="form-control">
+                    <div class="col-auto">
+                        <input type="number" v-model="a" class="form-control">
                     </div>
-                    <div class = "col-auto">
+                    <div class="col-auto">
                         +
                     </div>
-                    <div class = "col-auto">
-                        <input  type="number" v-model="b" class="form-control">
+                    <div class="col-auto">
+                        <input type="number" v-model="b" class="form-control">
                     </div>
-                    <div class = "col-auto">
+                    <div class="col-auto">
                         <button @click="sum" class="btn btn-primary">=</button>
                     </div>
-                    <div class = "col-auto">
+                    <div class="col-auto">
                         <span class="badge text-bg-primary fs-5">{{result}}</span>
                     </div>
                 </div>
@@ -96,10 +98,10 @@
                             age: '19',
                             tel: '777-666-333'
                         },
-                    flowers: ['роза', 'тюльпан', 'маргаритка', 'георгин', 'одуванчик'],
-                    a: 1,
-                    b: 10,
-                    result: '',    
+                        flowers: ['роза', 'тюльпан', 'маргаритка', 'георгин', 'одуванчик'],
+                        a: 1,
+                        b: 10,
+                        result: '',    
                     }
                 },
                 methods: {
@@ -111,10 +113,10 @@
                     },
                     edit(id,flower) {
                         let newName = prompt('Введите имя цветка:', flower);
-                        this.flowers[id]='сохранение...';
-                    setTimeout(() => {
-                        this.flowers[id]=newName;
-                    }, 3000)
+                        this.flowers[id]=null;
+                        setTimeout(() => {
+                            this.flowers[id]=newName;
+                        }, 3000)
                     },
                     sum() {
                         this.result = this.a +this.b;
